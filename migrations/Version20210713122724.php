@@ -1,0 +1,220 @@
+<?php
+
+declare(strict_types=1);
+
+namespace DoctrineMigrations;
+
+use Doctrine\DBAL\Schema\Schema;
+use Doctrine\Migrations\AbstractMigration;
+
+/**
+ * Auto-generated Migration: Please modify to your needs!
+ */
+final class Version20210713122724 extends AbstractMigration
+{
+    public function getDescription(): string
+    {
+        return '';
+    }
+
+    public function up(Schema $schema): void
+    {
+        // this up() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE TABLE currency (id BIGINT DEFAULT nextval(\'currency_id_seq\') NOT NULL, code VARCHAR(3) NOT NULL, slug VARCHAR(3) NOT NULL, name VARCHAR(80) NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX slug_idx ON currency (slug)');
+        $this->addSql('CREATE TABLE currency_rate (id BIGINT DEFAULT nextval(\'currency_rate_id_seq\') NOT NULL, currency_id_id BIGINT DEFAULT nextval(\'currency_id_seq\') NOT NULL, value NUMERIC(10, 4) NOT NULL, timestamp TIMESTAMP(0) WITHOUT TIME ZONE NOT NULL, PRIMARY KEY(id))');
+        $this->addSql('CREATE INDEX IDX_555B7C4D28A69C31 ON currency_rate (currency_id_id)');
+        $this->addSql('ALTER TABLE currency_rate ADD CONSTRAINT FK_555B7C4D28A69C31 FOREIGN KEY (currency_id_id) REFERENCES currency (id) NOT DEFERRABLE INITIALLY IMMEDIATE');
+        $this->addSql('ALTER TABLE public.currency_rate ADD CONSTRAINT currency_day_pair UNIQUE (currency_id_id, "timestamp");');
+
+        $this->addSql("INSERT INTO public.currency(code, slug, name) VALUES
+            ('AFN', 'afn', 'Afghani'),
+            ('EUR', 'eur', 'Euro'),
+            ('ALL', 'all', 'Lek'),
+            ('DZD', 'dzd', 'Algerian Dinar'),
+            ('USD', 'usd', 'US Dollar'),
+            ('AOA', 'aoa', 'Kwanza'),
+            ('XCD', 'xcd', 'East Caribbean Dollar'),
+            ('ARS', 'ars', 'Argentine Peso'),
+            ('AMD', 'amd', 'Armenian Dram'),
+            ('AWG', 'awg', 'Aruban Florin'),
+            ('AUD', 'aud', 'Australian Dollar'),
+            ('AZN', 'azn', 'Azerbaijanian Manat'),
+            ('BSD', 'bsd', 'Bahamian Dollar'),
+            ('BHD', 'bhd', 'Bahraini Dinar'),
+            ('BDT', 'bdt', 'Taka'),
+            ('BBD', 'bbd', 'Barbados Dollar'),
+            ('BYR', 'byr', 'Belarussian Ruble'),
+            ('BZD', 'bzd', 'Belize Dollar'),
+            ('XOF', 'xof', 'CFA Franc BCEAO'),
+            ('BMD', 'bmd', 'Bermudian Dollar'),
+            ('BTN', 'btn', 'Ngultrum'),
+            ('INR', 'inr', 'Indian Rupee'),
+            ('BOB', 'bob', 'Boliviano'),
+            ('BOV', 'bov', 'Mvdol'),
+            ('BAM', 'bam', 'Convertible Mark'),
+            ('BWP', 'bwp', 'Pula'),
+            ('NOK', 'nok', 'Norwegian Krone'),
+            ('BRL', 'brl', 'Brazilian Real'),
+            ('BND', 'bnd', 'Brunei Dollar'),
+            ('BGN', 'bgn', 'Bulgarian Lev'),
+            ('BIF', 'bif', 'Burundi Franc'),
+            ('KHR', 'khr', 'Riel'),
+            ('XAF', 'xaf', 'CFA Franc BEAC'),
+            ('CAD', 'cad', 'Canadian Dollar'),
+            ('CVE', 'cve', 'Cabo Verde Escudo'),
+            ('KYD', 'kyd', 'Cayman Islands Dollar'),
+            ('CLF', 'clf', 'Unidad de Fomento'),
+            ('CLP', 'clp', 'Chilean Peso'),
+            ('CNY', 'cny', 'Yuan Renminbi'),
+            ('COP', 'cop', 'Colombian Peso'),
+            ('COU', 'cou', 'Unidad de Valor Real'),
+            ('KMF', 'kmf', 'Comoro Franc'),
+            ('CDF', 'cdf', 'Congolese Franc'),
+            ('NZD', 'nzd', 'New Zealand Dollar'),
+            ('CRC', 'crc', 'Costa Rican Colon'),
+            ('HRK', 'hrk', 'Croatian Kuna'),
+            ('CUC', 'cuc', 'Peso Convertible'),
+            ('CUP', 'cup', 'Cuban Peso'),
+            ('ANG', 'ang', 'Netherlands Antillean Guilder'),
+            ('CZK', 'czk', 'Czech Koruna'),
+            ('DKK', 'dkk', 'Danish Krone'),
+            ('DJF', 'djf', 'Djibouti Franc'),
+            ('DOP', 'dop', 'Dominican Peso'),
+            ('EGP', 'egp', 'Egyptian Pound'),
+            ('SVC', 'svc', 'El Salvador Colon'),
+            ('ERN', 'ern', 'Nakfa'),
+            ('ETB', 'etb', 'Ethiopian Birr'),
+            ('FKP', 'fkp', 'Falkland Islands Pound'),
+            ('FJD', 'fjd', 'Fiji Dollar'),
+            ('XPF', 'xpf', 'CFP Franc'),
+            ('GMD', 'gmd', 'Dalasi'),
+            ('GEL', 'gel', 'Lari'),
+            ('GHS', 'ghs', 'Ghana Cedi'),
+            ('GIP', 'gip', 'Gibraltar Pound'),
+            ('GTQ', 'gtq', 'Quetzal'),
+            ('GBP', 'gbp', 'Pound Sterling'),
+            ('GNF', 'gnf', 'Guinea Franc'),
+            ('GYD', 'gyd', 'Guyana Dollar'),
+            ('HTG', 'htg', 'Gourde'),
+            ('HNL', 'hnl', 'Lempira'),
+            ('HKD', 'hkd', 'Hong Kong Dollar'),
+            ('HUF', 'huf', 'Forint'),
+            ('ISK', 'isk', 'Iceland Krona'),
+            ('IDR', 'idr', 'Rupiah'),
+            ('XDR', 'xdr', 'SDR (Special Drawing Right)'),
+            ('IRR', 'irr', 'Iranian Rial'),
+            ('IQD', 'iqd', 'Iraqi Dinar'),
+            ('ILS', 'ils', 'New Israeli Sheqel'),
+            ('JMD', 'jmd', 'Jamaican Dollar'),
+            ('JPY', 'jpy', 'Yen'),
+            ('JOD', 'jod', 'Jordanian Dinar'),
+            ('KZT', 'kzt', 'Tenge'),
+            ('KES', 'kes', 'Kenyan Shilling'),
+            ('KPW', 'kpw', 'North Korean Won'),
+            ('KRW', 'krw', 'Won'),
+            ('KWD', 'kwd', 'Kuwaiti Dinar'),
+            ('KGS', 'kgs', 'Som'),
+            ('LAK', 'lak', 'Kip'),
+            ('LBP', 'lbp', 'Lebanese Pound'),
+            ('LSL', 'lsl', 'Loti'),
+            ('ZAR', 'zar', 'Rand'),
+            ('LRD', 'lrd', 'Liberian Dollar'),
+            ('LYD', 'lyd', 'Libyan Dinar'),
+            ('CHF', 'chf', 'Swiss Franc'),
+            ('MOP', 'mop', 'Pataca'),
+            ('MKD', 'mkd', 'Denar'),
+            ('MGA', 'mga', 'Malagasy Ariary'),
+            ('MWK', 'mwk', 'Kwacha'),
+            ('MYR', 'myr', 'Malaysian Ringgit'),
+            ('MVR', 'mvr', 'Rufiyaa'),
+            ('MRO', 'mro', 'Ouguiya'),
+            ('MUR', 'mur', 'Mauritius Rupee'),
+            ('XUA', 'xua', 'ADB Unit of Account'),
+            ('MXN', 'mxn', 'Mexican Peso'),
+            ('MXV', 'mxv', 'Mexican Unidad de Inversion (UDI)'),
+            ('MDL', 'mdl', 'Moldovan Leu'),
+            ('MNT', 'mnt', 'Tugrik'),
+            ('MAD', 'mad', 'Moroccan Dirham'),
+            ('MZN', 'mzn', 'Mozambique Metical'),
+            ('MMK', 'mmk', 'Kyat'),
+            ('NAD', 'nad', 'Namibia Dollar'),
+            ('NPR', 'npr', 'Nepalese Rupee'),
+            ('NIO', 'nio', 'Cordoba Oro'),
+            ('NGN', 'ngn', 'Naira'),
+            ('OMR', 'omr', 'Rial Omani'),
+            ('PKR', 'pkr', 'Pakistan Rupee'),
+            ('PAB', 'pab', 'Balboa'),
+            ('PGK', 'pgk', 'Kina'),
+            ('PYG', 'pyg', 'Guarani'),
+            ('PEN', 'pen', 'Nuevo Sol'),
+            ('PHP', 'php', 'Philippine Peso'),
+            ('PLN', 'pln', 'Zloty'),
+            ('QAR', 'qar', 'Qatari Rial'),
+            ('RON', 'ron', 'New Romanian Leu'),
+            ('RUB', 'rub', 'Russian Ruble'),
+            ('RWF', 'rwf', 'Rwanda Franc'),
+            ('SHP', 'shp', 'Saint Helena Pound'),
+            ('WST', 'wst', 'Tala'),
+            ('STD', 'std', 'Dobra'),
+            ('SAR', 'sar', 'Saudi Riyal'),
+            ('RSD', 'rsd', 'Serbian Dinar'),
+            ('SCR', 'scr', 'Seychelles Rupee'),
+            ('SLL', 'sll', 'Leone'),
+            ('SGD', 'sgd', 'Singapore Dollar'),
+            ('XSU', 'xsu', 'Sucre'),
+            ('SBD', 'sbd', 'Solomon Islands Dollar'),
+            ('SOS', 'sos', 'Somali Shilling'),
+            ('SSP', 'ssp', 'South Sudanese Pound'),
+            ('LKR', 'lkr', 'Sri Lanka Rupee'),
+            ('SDG', 'sdg', 'Sudanese Pound'),
+            ('SRD', 'srd', 'Surinam Dollar'),
+            ('SZL', 'szl', 'Lilangeni'),
+            ('SEK', 'sek', 'Swedish Krona'),
+            ('CHE', 'che', 'WIR Euro'),
+            ('CHW', 'chw', 'WIR Franc'),
+            ('SYP', 'syp', 'Syrian Pound'),
+            ('TWD', 'twd', 'New Taiwan Dollar'),
+            ('TJS', 'tjs', 'Somoni'),
+            ('TZS', 'tzs', 'Tanzanian Shilling'),
+            ('THB', 'thb', 'Baht'),
+            ('TOP', 'top', 'Pa’anga'),
+            ('TTD', 'ttd', 'Trinidad and Tobago Dollar'),
+            ('TND', 'tnd', 'Tunisian Dinar'),
+            ('TRY', 'try', 'Turkish Lira'),
+            ('TMT', 'tmt', 'Turkmenistan New Manat'),
+            ('UGX', 'ugx', 'Uganda Shilling'),
+            ('UAH', 'uah', 'Hryvnia'),
+            ('AED', 'aed', 'UAE Dirham'),
+            ('USN', 'usn', 'US Dollar (Next day)'),
+            ('UYI', 'uyi', 'Uruguay Peso en Unidades Indexadas (URUIURUI)'),
+            ('UYU', 'uyu', 'Peso Uruguayo'),
+            ('UZS', 'uzs', 'Uzbekistan Sum'),
+            ('VUV', 'vuv', 'Vatu'),
+            ('VEF', 'vef', 'Bolivar'),
+            ('VND', 'vnd', 'Dong'),
+            ('YER', 'yer', 'Yemeni Rial'),
+            ('ZMW', 'zmw', 'Zambian Kwacha'),
+            ('ZWL', 'zwl', 'Zimbabwe Dollar'),
+            ('XBA', 'xba', 'Bond Markets Unit European Composite Unit (EURCO)'),
+            ('XBB', 'xbb', 'Bond Markets Unit European Monetary Unit (E.M.U.-6)'),
+            ('XBC', 'xbc', 'Bond Markets Unit European Unit of Account 9 (E.U.A.-9)'),
+            ('XBD', 'xbd', 'Bond Markets Unit European Unit of Account 17 (E.U.A.-17)'),
+            ('XTS', 'xts', 'Codes specifically reserved for testing purposes'),
+            ('XXX', 'xxx', 'The codes assigned for transactions where no currency is involved'),
+            ('XAU', 'xau', 'Gold'),
+            ('XPD', 'xpd', 'Palladium'),
+            ('XPT', 'xpt', 'Platinum'),
+            ('XAG', 'xag', 'Silver');
+            ");
+    }
+
+    public function down(Schema $schema): void
+    {
+        // this down() migration is auto-generated, please modify it to your needs
+        $this->addSql('CREATE SCHEMA public');
+        $this->addSql('ALTER TABLE currency_rate DROP CONSTRAINT FK_555B7C4D28A69C31');
+        $this->addSql('DROP TABLE currency');
+        $this->addSql('DROP TABLE currency_rate');
+    }
+}

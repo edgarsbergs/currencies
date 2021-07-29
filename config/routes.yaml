@@ -1,0 +1,13 @@
+currency_index:
+    path: /
+    controller: App\Controller\CurrencyController::index
+
+currency_show:
+  path: /currency/{slug}
+  controller: App\Controller\CurrencyController::show
+  requirements:
+    slug: '[a-zA-Z]{3}'
+
+api:
+  path: /api/{mode}
+  controller: App\Controller\CurrencyApiController::index

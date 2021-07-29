@@ -1,0 +1,25 @@
+{% extends 'layouts/default.html.twig' %}
+
+{% block title %}
+    {% trans %}Currencies{% endtrans %}
+{% endblock %}
+
+{% block content %}
+    {% if currencies|length > 0 %}
+        <ul class="list-group">
+            {% for currency in currencies %}
+                <li class="list-group-item">
+                    <a
+                            href="{{ path('currency_show', {slug: currency.slug}) }}"
+                            title="{{ currency.code }}"
+                    >
+                        {{ currency.code }} <small>({{ currency.name }})</small>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+        <div class="navigation">
+            {{ knp_pagination_render(currencies) }}
+        </div>
+    {% endif %}
+{% endblock %}

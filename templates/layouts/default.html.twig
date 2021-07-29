@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}Tet{% endblock %}</title>
+    {% block stylesheets %}
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css"/>
+    {% endblock %}
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            {% if block('breadcrumbs') is defined %}
+                <div>{{ block('breadcrumbs')}}</div>
+            {% endif %}
+
+            <h1>{{ block('title')}}</h1>
+
+            <div id="content">
+                {% block content %}{% endblock %}
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
